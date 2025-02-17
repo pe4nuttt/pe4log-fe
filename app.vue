@@ -1,9 +1,15 @@
 <template>
-	<div>
+	<!-- <div>
 		<Button>Test</Button>
 		<Button variant="secondary">Secondary</Button>
 		<NuxtRouteAnnouncer />
 		<NuxtWelcome />
+	</div> -->
+	<NuxtLoadingIndicator />
+	<div class="app">
+		<NuxtLayout>
+			<NuxtPage />
+		</NuxtLayout>
 	</div>
 </template>
 
