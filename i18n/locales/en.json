@@ -1,0 +1,5 @@
+{
+	"hello": "Hello",
+	"readMoreAboutMe": "Read more about me",
+	"homePageIntroText": "My name is <span class=\"text-primary font-bold\">{name}</span> and I'm a <span class=\"text-primary font-bold\">{role}</span> with a passion for <span class=\"text-primary font-bold\">{tools}</span> with over a decade of experience in the industry."
+}

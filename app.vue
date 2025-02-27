@@ -9,6 +9,7 @@
 	<div class="app">
 		<NuxtLayout>
 			<NuxtPage />
+			<Toaster />
 		</NuxtLayout>
 	</div>
 </template>
@@ -16,4 +17,5 @@
 <script setup>
 import './assets/styles/index.scss'
 import { Button } from '@/components/ui/button'
+import { Toaster } from './components/ui/toast/'
 </script>

@@ -12,6 +12,7 @@ export default withNuxt({
 		'@typescript-eslint/ban-types': 'off',
 		'@typescript-eslint/no-unused-vars': 'warn',
 		'@typescript-eslint/no-explicit-any': 'warn',
+		'import/first': 'off',
 		'@typescript-eslint/consistent-type-imports': [
 			'error',
 			{ prefer: 'type-imports', fixStyle: 'separate-type-imports' }

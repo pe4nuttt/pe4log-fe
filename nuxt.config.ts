@@ -8,7 +8,10 @@ export default defineNuxtConfig({
 		'@nuxt/eslint',
 		'@nuxtjs/color-mode',
 		'@nuxtjs/google-fonts',
-		'@nuxt/icon'
+		'@nuxt/icon',
+		'@nuxtjs/i18n',
+		'@pinia/nuxt',
+		'pinia-plugin-persistedstate/nuxt'
 	],
 	shadcn: {
 		/**
@@ -40,9 +43,39 @@ export default defineNuxtConfig({
 
 	googleFonts: {
 		families: {
-			'IBM Plex Mono': '200..700'
+			'IBM Plex Mono': [200, 300, 400, 500, 600, 700]
 		}
 	},
 
-	eslint: {}
+	i18n: {
+		locales: [
+			{
+				code: 'en',
+				file: 'en.json'
+			},
+			{
+				code: 'vi',
+				file: 'vi.json'
+			}
+		],
+		lazy: true,
+		defaultLocale: 'en',
+		detectBrowserLanguage: {
+			useCookie: true,
+			cookieKey: 'i18n_redirected',
+			redirectOn: 'root'
+		},
+		compilation: {
+			strictMessage: false,
+			escapeHtml: false
+		}
+	},
+
+	eslint: {},
+
+	runtimeConfig: {
+		public: {
+			baseURL: process.env.BASE_URL || 'https://api.example.com/'
+		}
+	}
 })

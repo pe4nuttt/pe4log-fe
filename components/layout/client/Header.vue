@@ -1,6 +1,6 @@
 <template>
 	<header
-		class="backdrop-blur-xs sticky top-0 flex items-center justify-between gap-8 bg-inherit p-4 text-muted-foreground md:p-5 xl:p-8"
+		class="sticky top-0 flex items-center justify-between gap-8 bg-inherit px-4 py-4 text-muted-foreground backdrop-blur-sm md:px-5 xl:px-8"
 	>
 		<NuxtLink to="/" class="text-lg font-semibold text-foreground">
 			Pe4nuttt.blog
@@ -34,9 +34,11 @@
 
 		<div class="flex items-center gap-2">
 			<Button variant="outline" size="icon" @click="handleToggleTheme">
-				<Icon
-					:name="$colorMode.value === 'dark' ? 'lucide:moon' : 'lucide:sun'"
-				/>
+				<ClientOnly>
+					<Icon
+						:name="$colorMode.value === 'dark' ? 'lucide:moon' : 'lucide:sun'"
+					/>
+				</ClientOnly>
 			</Button>
 			<Button variant="outline" @click="navigateTo('/auth/sign-in')">
 				Login
