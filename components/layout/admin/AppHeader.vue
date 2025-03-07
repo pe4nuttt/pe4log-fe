@@ -1,6 +1,6 @@
 <template>
 	<header
-		class="fixed flex h-16 w-[inherit] items-center justify-between gap-3 px-4 sm:gap-4"
+		class="fixed z-50 flex h-16 w-[inherit] items-center justify-between gap-3 bg-background px-4 sm:gap-4"
 	>
 		<div class="flex items-center gap-2">
 			<SidebarTrigger class="scale-125" />

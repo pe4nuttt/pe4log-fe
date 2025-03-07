@@ -12,6 +12,9 @@ export default withNuxt({
 		'@typescript-eslint/ban-types': 'off',
 		'@typescript-eslint/no-unused-vars': 'warn',
 		'@typescript-eslint/no-explicit-any': 'warn',
+		'vue/no-multiple-template-root': 'off',
+		'vue/html-self-closing': 'off',
+		'vue/no-mutating-props': 'off',
 		'import/first': 'off',
 		'@typescript-eslint/consistent-type-imports': [
 			'error',

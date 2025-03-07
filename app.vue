@@ -18,4 +18,7 @@
 import './assets/styles/index.scss'
 import { Button } from '@/components/ui/button'
 import { Toaster } from './components/ui/toast/'
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'
+
+ModuleRegistry.registerModules([AllCommunityModule])
 </script>

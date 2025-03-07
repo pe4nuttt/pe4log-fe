@@ -39,27 +39,27 @@ const sidebarGroups = [
 		items: [
 			{
 				title: 'Dashboard',
-				url: '#',
+				url: '/admin/dashboard',
 				icon: Home
 			},
 			{
 				title: 'Posts',
-				url: '#',
+				url: '/admin/posts',
 				icon: Inbox
 			},
 			{
 				title: 'Categories',
-				url: '#',
+				url: '/admin/categories',
 				icon: Calendar
 			},
 			{
 				title: 'Tags',
-				url: '#',
+				url: '/admin/tags',
 				icon: Calendar
 			},
 			{
 				title: 'Users',
-				url: '#',
+				url: '/admin/users',
 				icon: Search
 			}
 		]

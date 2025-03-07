@@ -11,7 +11,8 @@ export default defineNuxtConfig({
 		'@nuxt/icon',
 		'@nuxtjs/i18n',
 		'@pinia/nuxt',
-		'pinia-plugin-persistedstate/nuxt'
+		'pinia-plugin-persistedstate/nuxt',
+		'dayjs-nuxt'
 	],
 	shadcn: {
 		/**
@@ -43,7 +44,8 @@ export default defineNuxtConfig({
 
 	googleFonts: {
 		families: {
-			'IBM Plex Mono': [200, 300, 400, 500, 600, 700]
+			'IBM Plex Mono': [200, 300, 400, 500, 600, 700],
+			Inter: [200, 300, 400, 500, 600, 700]
 		}
 	},
 
