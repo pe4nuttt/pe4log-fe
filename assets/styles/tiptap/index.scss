@@ -1,0 +1,38 @@
+@forward './typography.scss';
+@forward './list.scss';
+@forward './code.scss';
+@forward './collab.scss';
+.ProseMirror {
+	@apply z-0 mx-auto max-w-[var(--document-content-max-w)] pb-16 pt-6 caret-black outline-0 dark:caret-white;
+
+	// @apply caret-black dark:caret-white outline-0 pr-8 pl-20 py-16 z-0 lg:pl-8 lg:pr-8;
+
+	& > * {
+		@apply mx-auto max-w-[52rem];
+	}
+
+	.selection {
+		@apply inline;
+	}
+
+	.selection,
+	*::selection {
+		@apply bg-black/10 dark:bg-white/20;
+	}
+
+	&.resize-cursor {
+		@apply cursor-col-resize;
+	}
+
+	.ProseMirror-gapcursor {
+		@apply relative mx-auto w-full max-w-2xl;
+
+		&:after {
+			@apply -top-[1.5em] left-0 right-0 mx-auto w-full max-w-2xl border-t-black/40 dark:border-t-white/40;
+		}
+	}
+}
+
+[data-theme='slash-command'] {
+	width: 1000vw;
+}

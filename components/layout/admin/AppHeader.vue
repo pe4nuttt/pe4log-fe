@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { cn } from '@/lib/utils'
+import { cn } from '@/libs/utils'
 import Separator from '~/components/ui/separator/Separator.vue'
 import SidebarTrigger from '~/components/ui/sidebar/SidebarTrigger.vue'
 import AppBreadcrumb from './AppBreadcrumb.vue'

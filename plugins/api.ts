@@ -2,6 +2,7 @@ import { $fetch } from 'ofetch'
 import type { FetchOptions } from 'ofetch'
 import AuthModule from '~/repository/modules/auth'
 import CategoriesModule from '~/repository/modules/categories'
+import PostsModule from '~/repository/modules/posts'
 import TagsModule from '~/repository/modules/tags'
 import UserModule from '~/repository/modules/user'
 import { PREFERENCE_KEYS } from '~/utils/constants'
@@ -11,6 +12,7 @@ interface IApiInstace {
 	user: UserModule
 	categories: CategoriesModule
 	tags: TagsModule
+	posts: PostsModule
 }
 
 let refreshTokenPromise: Promise<string | null> | null = null
@@ -75,7 +77,8 @@ export default defineNuxtPlugin((nuxtApp) => {
 		auth: new AuthModule(apiFetcher),
 		user: new UserModule(apiFetcher),
 		categories: new CategoriesModule(apiFetcher),
-		tags: new TagsModule(apiFetcher)
+		tags: new TagsModule(apiFetcher),
+		posts: new PostsModule(apiFetcher)
 	}
 
 	return {
