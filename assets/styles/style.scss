@@ -6,3 +6,34 @@ html {
 
 body {
 }
+
+// Scrollbar
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #27272a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #4b4b50;
+	border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	// background: #fff;
+}
+
+// Tooltip
+.v-popper--theme-tooltip {
+	.v-popper__inner {
+		// background: rgba(0, 0, 0, 0.8);
+		background-color: hsl(var(--primary));
+		color: hsl(var(--primary-foreground));
+		font-size: 12px;
+	}
+}

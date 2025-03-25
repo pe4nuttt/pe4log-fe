@@ -1,5 +1,5 @@
 <template>
-	<div class="flex h-full flex-col space-y-4">
+	<div class="mr-[-0.75rem] flex h-full flex-col space-y-4 pb-[2px] pr-3">
 		<div class="flex flex-wrap items-center justify-between gap-x-4">
 			<div>
 				<h2 class="text-3xl font-bold tracking-tight">
@@ -14,24 +14,29 @@
 				</p>
 			</div>
 			<div class="flex gap-2">
-				<Button>
+				<Button disabled class="bg-muted text-muted-foreground">
+					{{ isEditorSaved ? 'Saved' : 'Saving...' }}
+				</Button>
+
+				<Button @click="openFormDialog = true">
 					<Settings />
 					Settings
-					<Plus />
 				</Button>
 			</div>
 		</div>
 
 		<ClientOnly>
-			<PostEditor class="flex-1 overflow-hidden" />
+			<PostEditor v-model:is-editor-saved="isEditorSaved" class="mx-[1px]" />
 		</ClientOnly>
+
+		<PostFormDialog v-model:open="openFormDialog" :category="null" />
 	</div>
 </template>
 
 <script setup lang="ts">
 import PostEditor from '~/components/pages/admin/posts/PostEditor.vue'
 import { Settings } from 'lucide-vue-next'
-import ScrollArea from '~/components/ui/scroll-area/ScrollArea.vue'
+import PostFormDialog from '~/components/pages/admin/posts/PostFormDialog.vue'
 
 definePageMeta({
 	layout: 'admin',
@@ -45,6 +50,9 @@ const postId = route.params.id
 const postStore = usePostStore()
 const { post } = storeToRefs(postStore)
 const { getPostDetails } = postStore
+
+const openFormDialog = ref(false)
+const isEditorSaved = ref(true)
 
 const { refresh: refreshPost } = await useAsyncData(
 	'postDetail',

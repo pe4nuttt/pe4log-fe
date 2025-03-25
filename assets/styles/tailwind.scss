@@ -159,4 +159,7 @@
 }
 
 @layer components {
+	.required {
+		@apply after:ml-1 after:text-destructive after:content-['*'];
+	}
 }

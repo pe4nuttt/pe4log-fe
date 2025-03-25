@@ -93,4 +93,7 @@ module.exports = {
     },
   },
   plugins: [animate],
+  content: [
+    "./node_modules/echo-editor/**/*.{html,js, jsx,vue,ts,tsx}",
+  ]
 }

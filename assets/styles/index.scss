@@ -1,2 +1,104 @@
 @forward './style.scss';
 @forward './tiptap/index.scss';
+@forward './echo-editor.scss';
+
+// .vc-green-primary {
+// 	--vc-accent-100: #bbfadb;
+// 	--vc-accent-200: #a5e2c5;
+// 	--vc-accent-300: #89caab;
+// 	--vc-accent-400: #60a383;
+// 	--vc-accent-500: #4d9170;
+// 	--vc-accent-600: #357456;
+// 	--vc-accent-700: #276447;
+// 	--vc-accent-800: #285e45;
+// 	--vc-accent-900: #184b32;
+// }
+
+.vc-neutral {
+	--vc-accent-50: hsl(0, 0%, 98%); /* Lightest neutral */
+	--vc-accent-100: hsl(0, 0%, 96%); /* Soft neutral background */
+	--vc-accent-200: hsl(0, 0%, 90%); /* Light gray */
+	--vc-accent-300: hsl(0, 0%, 83%); /* Medium-light gray */
+	--vc-accent-400: hsl(0, 0%, 64%); /* Neutral gray */
+	--vc-accent-500: hsl(0, 0%, 45%); /* Muted gray */
+	--vc-accent-600: hsl(0, 0%, 32%); /* Dark gray */
+	--vc-accent-700: hsl(0, 0%, 25%); /* Deeper neutral tone */
+	--vc-accent-800: hsl(0, 0%, 15%); /* Almost black */
+	--vc-accent-900: hsl(0, 0%, 9%); /* Deepest neutral */
+}
+
+.vc-dark {
+	/* Base colors */
+	--vc-color: hsl(0, 0%, 95%);
+	--vc-bg: hsl(0, 0%, 10%);
+	--vc-border: hsl(0, 0%, 20%);
+	--vc-hover-bg: hsla(0, 0%, 30%, 0.3);
+	--vc-focus-ring: 0 0 0 2px hsla(0, 0%, 70%, 0.7);
+
+	/* Calendar header */
+	--vc-header-arrow-color: hsl(0, 0%, 75%);
+	--vc-header-arrow-hover-bg: hsl(0, 0%, 15%);
+	--vc-header-title-color: hsl(0, 0%, 95%);
+
+	/* Calendar weekdays */
+	--vc-weekday-color: hsl(0, 0%, 65%);
+
+	/* Calendar weeknumbers */
+	--vc-weeknumber-color: hsl(0, 0%, 50%);
+
+	/* Calendar nav */
+	--vc-nav-hover-bg: hsl(0, 0%, 18%);
+	--vc-nav-title-color: hsl(0, 0%, 95%);
+	--vc-nav-item-hover-box-shadow: none;
+	--vc-nav-item-active-color: hsl(0, 0%, 100%);
+	--vc-nav-item-active-bg: hsl(0, 0%, 30%);
+	--vc-nav-item-active-box-shadow: none;
+	--vc-nav-item-current-color: hsl(0, 0%, 75%);
+
+	/* Calendar day popover */
+	--vc-day-popover-container-color: hsl(0, 0%, 15%);
+	--vc-day-popover-container-bg: hsl(0, 0%, 95%);
+	--vc-day-popover-container-border: hsl(0, 0%, 25%);
+	--vc-day-popover-header-color: hsl(0, 0%, 75%);
+
+	/* Popover content */
+	--vc-popover-content-color: hsl(0, 0%, 95%);
+	--vc-popover-content-bg: hsl(0, 0%, 15%);
+	--vc-popover-content-border: hsl(0, 0%, 20%);
+
+	/* Time picker */
+	--vc-time-picker-border: hsl(0, 0%, 20%);
+	--vc-time-weekday-color: hsl(0, 0%, 70%);
+	--vc-time-month-color: hsl(0, 0%, 75%);
+	--vc-time-day-color: hsl(0, 0%, 75%);
+	--vc-time-year-color: hsl(0, 0%, 60%);
+
+	/* Time select group */
+	--vc-time-select-group-bg: hsl(0, 0%, 18%);
+	--vc-time-select-group-border: hsl(0, 0%, 25%);
+	--vc-time-select-group-icon-color: hsl(0, 0%, 75%);
+
+	/* Base select */
+	--vc-select-color: hsl(0, 0%, 85%);
+	--vc-select-bg: hsl(0, 0%, 18%);
+	--vc-select-hover-bg: hsl(0, 0%, 22%);
+
+	/* Calendar day */
+	--vc-day-content-hover-bg: var(--vc-hover-bg);
+	--vc-day-content-disabled-color: hsl(0, 0%, 30%);
+
+	/* Calendar attributes */
+	&.vc-attr,
+	& .vc-attr {
+		--vc-content-color: hsl(0, 0%, 75%);
+		--vc-highlight-outline-bg: hsl(0, 0%, 10%);
+		--vc-highlight-outline-border: hsl(0, 0%, 40%);
+		--vc-highlight-outline-content-color: hsl(0, 0%, 85%);
+		--vc-highlight-light-bg: hsl(0, 0%, 18%);
+		--vc-highlight-light-content-color: hsl(0, 0%, 90%);
+		--vc-highlight-solid-bg: hsl(0, 0%, 30%);
+		--vc-highlight-solid-content-color: hsl(0, 0%, 100%);
+		--vc-dot-bg: hsl(0, 0%, 60%);
+		--vc-bar-bg: hsl(0, 0%, 60%);
+	}
+}

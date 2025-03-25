@@ -1,10 +1,8 @@
 import type {
 	IApiReponse,
-	IBodyAddTag,
-	ITag,
 	IPaginationRes,
-	IParamsGetListTags,
-	IPost
+	IPost,
+	IParamsGetListPosts
 } from '~/types'
 import HttpFactory from '../factory'
 
@@ -13,6 +11,17 @@ class PostsModule extends HttpFactory {
 
 	async getPostDetails(id: IPost['id']) {
 		return this.call<IApiReponse<IPost>>('GET', `${this.RESOURCE}/${id}`)
+	}
+
+	async getListPosts(params: IParamsGetListPosts) {
+		return this.call<IApiReponse<IPaginationRes<IPost>>>(
+			'GET',
+			`${this.RESOURCE}`,
+			undefined,
+			{
+				params
+			}
+		)
 	}
 }
 

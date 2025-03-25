@@ -1,3 +1,4 @@
+import type { IPagination } from './common'
 import type { IUser } from './user'
 
 export enum EPostStatus {
@@ -21,4 +22,11 @@ export interface IPost {
 	createdAt: Date
 	updatedAt?: Date | null
 	deletedAt?: Date | null
+}
+
+export interface IParamsGetListPosts extends IPagination {
+	status?: EPostStatus | null
+	tagIds?: number[] | null
+	authorId?: number | null
+	categoryId?: number | null
 }

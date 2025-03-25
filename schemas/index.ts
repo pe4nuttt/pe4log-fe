@@ -15,3 +15,13 @@ export const AddTagSchema = z.object({
 	slug: z.string().min(3).max(200).optional().nullable().or(z.literal('')),
 	color: z.string().nullable()
 })
+
+export const EditPostSchema = z.object({
+	title: z.string().nonempty('Post title is required').min(3).max(512),
+	status: z.string().nonempty('Status is required'),
+	// slug: z.string().nonempty('Post slug is required').max(512).optional(),
+	seoTitle: z.string().max(512).optional().nullable(),
+	seoDescription: z.string().max(512).optional().nullable(),
+	category: z.number().min(1).optional().nullable(),
+	tags: z.array(z.number().min(1)).optional().nullable()
+})

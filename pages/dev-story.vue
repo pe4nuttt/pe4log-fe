@@ -1,5 +1,10 @@
 <template>
 	<div class="p-4">
+		<Button variant="secondary">Submit</Button>
+
+		<CalendarInput class="mt-2 w-[280px]" />
+		<CalendarRangeInput class="w-[568px]" />
+
 		<div class="space-y-3">
 			<ClientOnly>
 				<div>
@@ -90,6 +95,8 @@
 				</DrawerFooter>
 			</DrawerContent>
 		</Drawer>
+
+		<Button disabled>Button Disabled</Button>
 	</div>
 </template>
 
@@ -117,6 +124,8 @@ import {
 	DrawerTitle,
 	DrawerTrigger
 } from '@/components/ui/drawer'
+import { CalendarInput } from '~/components/ui/calendar-select'
+import CalendarRangeInput from '~/components/ui/calendar-select/CalendarRangeInput.vue'
 
 const colorMode = useColorMode()
 const pageNum = ref(1)
@@ -216,7 +225,7 @@ const rowData = ref<IRow[]>([
 	{ make: 'Nissan', model: 'Juke', price: 20675, electric: false }
 ])
 
-const openDrawer = ref(true)
+const openDrawer = ref(false)
 
 const colDefs = ref<ColDef<IRow>[]>([
 	{ field: 'make', width: 300, minWidth: 150 },

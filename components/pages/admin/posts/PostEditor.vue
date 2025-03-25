@@ -1,65 +1,108 @@
 <template>
-	<Card>
-		<ScrollArea class="h-full">
-			<EditorContent class="h-full" :editor="tiptapEditor" />
-			<template v-if="tiptapEditor">
-				<TextBubbleMenu :editor="tiptapEditor" />
-			</template>
-		</ScrollArea>
-	</Card>
+	<echo-editor
+		:extensions="extensions"
+		:hide-toolbar="false"
+		:hide-menubar="true"
+		max-height="700px"
+		min-height="500px"
+		:dark="$colorMode.value === 'dark'"
+	/>
 </template>
 
 <script setup lang="ts">
-import { useEditor, EditorContent } from '@tiptap/vue-3'
-import type { Editor } from '@tiptap/vue-3'
+import { EchoEditor, ImageUpload, locale } from 'echo-editor'
 import * as Y from 'yjs'
 import { HocuspocusProvider } from '@hocuspocus/provider'
-import { ExtensionKit } from '~/libs/tiptap/extension-kit'
-import TextBubbleMenu from '@/components/tiptap/TextBubbleMenu/TextBubbleMenu.vue'
-import Card from '~/components/ui/card/Card.vue'
-import ScrollArea from '~/components/ui/scroll-area/ScrollArea.vue'
+import { EchoEditorExtensionKit } from '~/libs/echo-editor'
+import Collaboration from '@tiptap/extension-collaboration'
+import CollaborationCursor from '@tiptap/extension-collaboration-cursor'
+import { useVModel } from '@vueuse/core'
+import { EHocuspocusEvents } from '~/types/tiptap'
 
-// Data
-const editor = useEditor({
-	content: `
-    <p>I’m running Tiptap with Vue.js. 🎉</p>
-  `,
-	extensions: [...ExtensionKit],
-	editorProps: {
-		attributes: {
-			class: 'min-h-full'
-		}
-	}
+type TProps = {
+	isEditorSaved?: boolean
+}
+
+const props = withDefaults(defineProps<TProps>(), {
+	isEditorSaved: true
 })
 
-// console.log('[TEST]', editor);
+const emits = defineEmits<{
+	'update:isEditorSaved': [isEditorSaved: boolean]
+}>()
 
-// const editor = useTiptapEditor({
-//   ydoc,
-//   provider,
-// });
+// Data
+const route = useRoute()
+const { $api } = useNuxtApp()
+const isEditorSaved = useVModel(props, 'isEditorSaved', emits) as Ref<boolean>
+
+const postId = route.params.id
 const wsConnection = new WebSocket('ws://127.0.0.1:8000/sync')
 const ydoc = new Y.Doc()
 const provider = new HocuspocusProvider({
-	name: 'post_1',
+	name: `post_${postId}`,
 	url: wsConnection.url,
 	document: ydoc
 })
 
-const tiptapEditor = shallowRef<Editor | undefined>()
-
-onMounted(async () => {
-	await nextTick()
-	const { editor } = useTiptapEditor({
-		ydoc: ydoc,
-		provider: provider
+const extensions = [
+	...EchoEditorExtensionKit,
+	ImageUpload.configure({
+		upload: async (file: File) => {
+			try {
+				console.log('[CHECK]', file)
+				const response = await $api.files.uploadBlogImage({
+					file
+				})
+				return response.data.url
+			} catch (error) {
+				console.error(error)
+				return URL.createObjectURL(file)
+			}
+		}
+	}),
+	Collaboration.configure({
+		document: ydoc
 	})
-	tiptapEditor.value = editor
+	// CollaborationCursor.configure({
+	// 	provider: provider,
+	// 	user: {
+	// 		name: 'Tien Anh',
+	// 		color: '#f783ac'
+	// 	}
+	// })
+]
 
-	console.log('[MOUNTED]', editor)
+provider.on('outgoingMessage', (message: any) => {
+	// console.log('[OUTGOING]', message)
+})
 
-	// initHocuspocusProvider();
+provider.on('message', (message: any) => {
+	console.log('[MESSAGE]', message)
+})
+
+provider.on('synced', (data: any) => {
+	console.log('[SYNCED]', data)
+	// isEditorSaved.value = true
+})
+
+provider.on('stateless', (stateless: EHocuspocusEvents) => {
+	console.log('[STATELESS]', stateless)
+	switch (stateless) {
+		case EHocuspocusEvents.DOCUMENT_SAVED:
+			isEditorSaved.value = false
+			break
+		case EHocuspocusEvents.DOCUMENT_SAVING:
+			isEditorSaved.value = false
+			break
+		default:
+			break
+	}
+})
+
+onMounted(() => {
+	locale.setLang('en')
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

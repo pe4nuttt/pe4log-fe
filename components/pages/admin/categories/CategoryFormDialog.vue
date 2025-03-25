@@ -21,7 +21,7 @@
 					:validate-on-blur="!isFieldDirty"
 				>
 					<FormItem>
-						<FormLabel>Name</FormLabel>
+						<FormLabel class="required">Name</FormLabel>
 						<FormControl>
 							<Input type="text" placeholder="Name" v-bind="componentField" />
 						</FormControl>
@@ -40,7 +40,7 @@
 			</form>
 			<SheetFooter>
 				<SheetClose as-child>
-					<Button variant="outline" type="submit">Close</Button>
+					<Button variant="outline">Close</Button>
 				</SheetClose>
 				<Button type="submit" @click="onSubmit">Save changes</Button>
 			</SheetFooter>
