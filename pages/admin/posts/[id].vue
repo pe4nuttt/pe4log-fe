@@ -1,5 +1,8 @@
 <template>
-	<div class="mr-[-0.75rem] flex h-full flex-col space-y-4 pb-[2px] pr-3">
+	<div
+		class="relative mb-4 mr-[-0.75rem] flex h-full flex-col space-y-4 overflow-y-auto pb-[2px] pr-3"
+	>
+		<LoadingOverlay v-if="isLoading" />
 		<div class="flex flex-wrap items-center justify-between gap-x-4">
 			<div>
 				<h2 class="text-3xl font-bold tracking-tight">
@@ -29,7 +32,7 @@
 			<PostEditor v-model:is-editor-saved="isEditorSaved" class="mx-[1px]" />
 		</ClientOnly>
 
-		<PostFormDialog v-model:open="openFormDialog" :category="null" />
+		<PostFormDialog v-model:open="openFormDialog" @updated="refreshPost" />
 	</div>
 </template>
 
@@ -45,7 +48,9 @@ definePageMeta({
 
 const dayjs = useDayjs()
 const route = useRoute()
+const router = useRouter()
 const postId = route.params.id
+const showSetting = route.query.showSetting
 
 const postStore = usePostStore()
 const { post } = storeToRefs(postStore)
@@ -54,7 +59,7 @@ const { getPostDetails } = postStore
 const openFormDialog = ref(false)
 const isEditorSaved = ref(true)
 
-const { refresh: refreshPost } = await useAsyncData(
+const { refresh: refreshPost, status } = await useAsyncData(
 	'postDetail',
 	async () => {
 		return getPostDetails(+postId)
@@ -67,10 +72,20 @@ const { refresh: refreshPost } = await useAsyncData(
 			})
 	},
 	{
-		// server: false,
 		lazy: true
 	}
 )
+
+const isLoading = computed(() => status.value === 'pending')
+
+onMounted(() => {
+	if (showSetting) {
+		openFormDialog.value = true
+		router.replace({
+			query: {}
+		})
+	}
+})
 </script>
 
 <style scoped></style>

@@ -15,9 +15,7 @@ const props = defineProps({
 	}
 })
 
-onMounted(() => {
-	console.log('[LOADING]', props.params)
-})
+onMounted(() => {})
 </script>
 
 <style lang="scss" scoped></style>

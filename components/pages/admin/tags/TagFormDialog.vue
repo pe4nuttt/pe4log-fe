@@ -191,7 +191,8 @@ watch(
 		if (props.type === EEntityFormType.EDIT && props.tag) {
 			setValues({
 				name: props.tag.name,
-				slug: props.tag.slug
+				slug: props.tag.slug,
+				color: props.tag.color
 			})
 		}
 	},

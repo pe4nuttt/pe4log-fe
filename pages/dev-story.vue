@@ -2,8 +2,11 @@
 	<div class="p-4">
 		<Button variant="secondary">Submit</Button>
 
+		<UploadImage />
+
 		<CalendarInput class="mt-2 w-[280px]" />
 		<CalendarRangeInput class="w-[568px]" />
+		<MultiSelect class="w-[280px]" :options="frameworksList" />
 
 		<div class="space-y-3">
 			<ClientOnly>
@@ -126,12 +129,23 @@ import {
 } from '@/components/ui/drawer'
 import { CalendarInput } from '~/components/ui/calendar-select'
 import CalendarRangeInput from '~/components/ui/calendar-select/CalendarRangeInput.vue'
+import MultiSelect from '~/components/ui/multi-select/MultiSelect.vue'
+import VxDialog from '~/components/global/VxDialog.vue'
+import UploadImage from '~/components/ui/upload/UploadImage.vue'
 
 const colorMode = useColorMode()
 const pageNum = ref(1)
 const pageSize = ref(10)
 
 //Options
+const frameworksList = [
+	{ value: 'react', label: 'React' },
+	{ value: 'angular', label: 'Angular' },
+	{ value: 'vue', label: 'Vue' },
+	{ value: 'svelte', label: 'Svelte' },
+	{ value: 'ember', label: 'Ember' }
+]
+
 const timezones = [
 	{
 		label: 'North America',

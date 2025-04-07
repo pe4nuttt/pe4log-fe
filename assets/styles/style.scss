@@ -13,8 +13,13 @@ body {
 }
 
 /* Track */
-::-webkit-scrollbar-track {
-	background: #27272a;
+body {
+}
+
+.dark {
+	::-webkit-scrollbar-track {
+		background: #27272a;
+	}
 }
 
 /* Handle */

@@ -14,7 +14,9 @@ export default defineNuxtConfig({
 		'pinia-plugin-persistedstate/nuxt',
 		'dayjs-nuxt',
 		'floating-vue/nuxt',
-		'@samk-dev/nuxt-vcalendar'
+		'@samk-dev/nuxt-vcalendar',
+		'@nuxt/image',
+		'@nuxt/test-utils/module'
 	],
 	shadcn: {
 		/**

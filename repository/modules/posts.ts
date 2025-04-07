@@ -2,7 +2,9 @@ import type {
 	IApiReponse,
 	IPaginationRes,
 	IPost,
-	IParamsGetListPosts
+	IParamsGetListPosts,
+	IBodyEditPost,
+	IResponseUploadPostCoverImage
 } from '~/types'
 import HttpFactory from '../factory'
 
@@ -21,6 +23,33 @@ class PostsModule extends HttpFactory {
 			{
 				params
 			}
+		)
+	}
+
+	async generateNewPost() {
+		return this.call<IApiReponse<IPost>>('POST', `${this.RESOURCE}/generate`)
+	}
+
+	async editPost(postId: number, body: IBodyEditPost) {
+		return this.call<IApiReponse<IPost>>(
+			'PATCH',
+			`${this.RESOURCE}/${postId}`,
+			body
+		)
+	}
+
+	async deletePost(postId: number) {
+		return this.call<IApiReponse<void>>('DELETE', `${this.RESOURCE}/${postId}`)
+	}
+
+	async uploadPostCoverImage(postId: number, file: File) {
+		const formData = new FormData()
+		formData.append('file', file)
+
+		return this.call<IApiReponse<IResponseUploadPostCoverImage>>(
+			'POST',
+			`${this.RESOURCE}/${postId}/cover-image`,
+			formData
 		)
 	}
 }

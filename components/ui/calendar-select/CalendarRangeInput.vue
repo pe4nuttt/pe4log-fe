@@ -1,7 +1,7 @@
 <template>
 	<div class="v-date-picker-container flex justify-between gap-2">
 		<v-date-picker
-			:v-model="modelValue"
+			v-model.range="modelValue"
 			:update-on-input="false"
 			:popover="popover"
 			locale="en"
@@ -128,6 +128,13 @@ const masks = computed(() => ({
 	modelValue: props.format,
 	input: [props.format]
 }))
+
+watch(
+	() => modelValue.value,
+	(value) => {
+		console.log('[WATCH]', value)
+	}
+)
 </script>
 
 <style lang="scss"></style>

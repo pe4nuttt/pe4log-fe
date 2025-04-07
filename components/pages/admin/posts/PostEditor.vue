@@ -51,7 +51,7 @@ const extensions = [
 		upload: async (file: File) => {
 			try {
 				console.log('[CHECK]', file)
-				const response = await $api.files.uploadBlogImage({
+				const response = await $api.files.uploadBlogImage(postId as string, {
 					file
 				})
 				return response.data.url

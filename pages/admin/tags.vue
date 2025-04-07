@@ -131,7 +131,7 @@ const colDefs = ref<ColDef<ITag>[]>([
 			return `<div class="flex items-center gap-1">
 			<div 
 				style="color: ${params.value ?? 'inherit'}; background: ${params.value ? getTagBackgroundFromColor(params.value) : 'unset'}"
-				class="mr-2 rounded-2xl border-[1px] border-muted px-2 py-[3px] text-xs font-medium leading-4'
+				class="mr-2 rounded-2xl border-[1px] border-muted px-2 py-[3px] text-xs font-medium leading-4"
 			>
 				Tag
 			</div>
