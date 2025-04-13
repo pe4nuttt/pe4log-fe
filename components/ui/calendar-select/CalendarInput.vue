@@ -17,6 +17,7 @@
 		>
 			<!-- :select-attribute="selectAttribute" -->
 			<template #default="{ inputValue, inputEvents }">
+				{{ inputValue }}
 				<Input
 					v-bind="$attrs"
 					:disabled="disabled"
@@ -43,7 +44,7 @@ interface MinMax {
 
 interface Props {
 	mode?: string
-	modelValue?: string | null
+	modelValue?: Date | string | null
 	minMax?: MinMax
 	placeholder?: string
 	disabled?: boolean
@@ -62,7 +63,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emits = defineEmits<{
-	'update:modelValue': (value: string | null) => void
+	'update:modelValue': (value: Date | string | null) => void
 }>()
 
 const colorMode = useColorMode()

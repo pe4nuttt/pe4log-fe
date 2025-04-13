@@ -6,7 +6,9 @@
 			Pe4nuttt.blog
 		</NuxtLink>
 
-		<div class="flex h-8 items-center gap-4 rounded-xl border px-4 py-1">
+		<div
+			class="flex h-8 items-center gap-4 rounded-xl border bg-background px-4 py-1"
+		>
 			<NuxtLink
 				to="/"
 				active-class="text-foreground"

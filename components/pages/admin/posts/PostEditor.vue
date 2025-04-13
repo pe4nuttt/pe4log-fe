@@ -1,5 +1,6 @@
 <template>
 	<echo-editor
+		v-model="editorHtml"
 		:extensions="extensions"
 		:hide-toolbar="false"
 		:hide-menubar="true"
@@ -7,16 +8,23 @@
 		min-height="500px"
 		:dark="$colorMode.value === 'dark'"
 	/>
+	<!-- @change="onUpdateEditor($event)" -->
 </template>
 
 <script setup lang="ts">
-import { EchoEditor, ImageUpload, locale } from 'echo-editor'
+import {
+	EchoEditor,
+	ImageUpload,
+	locale,
+	type EchoEditorOnChange,
+	type JSONContent
+} from 'echo-editor'
 import * as Y from 'yjs'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import { EchoEditorExtensionKit } from '~/libs/echo-editor'
 import Collaboration from '@tiptap/extension-collaboration'
 import CollaborationCursor from '@tiptap/extension-collaboration-cursor'
-import { useVModel } from '@vueuse/core'
+import { useVModel, useDebounceFn } from '@vueuse/core'
 import { EHocuspocusEvents } from '~/types/tiptap'
 
 type TProps = {
@@ -35,6 +43,7 @@ const emits = defineEmits<{
 const route = useRoute()
 const { $api } = useNuxtApp()
 const isEditorSaved = useVModel(props, 'isEditorSaved', emits) as Ref<boolean>
+const { toastSuccess, toastError } = useAppToast()
 
 const postId = route.params.id
 const wsConnection = new WebSocket('ws://127.0.0.1:8000/sync')
@@ -44,13 +53,13 @@ const provider = new HocuspocusProvider({
 	url: wsConnection.url,
 	document: ydoc
 })
+const editorHtml = ref('')
 
 const extensions = [
 	...EchoEditorExtensionKit,
 	ImageUpload.configure({
 		upload: async (file: File) => {
 			try {
-				console.log('[CHECK]', file)
 				const response = await $api.files.uploadBlogImage(postId as string, {
 					file
 				})
@@ -74,7 +83,7 @@ const extensions = [
 ]
 
 provider.on('outgoingMessage', (message: any) => {
-	// console.log('[OUTGOING]', message)
+	console.log('[OUTGOING]', message)
 })
 
 provider.on('message', (message: any) => {
@@ -99,6 +108,24 @@ provider.on('stateless', (stateless: EHocuspocusEvents) => {
 			break
 	}
 })
+
+const onUpdateEditor = useDebounceFn(async (value: string) => {
+	try {
+		isEditorSaved.value = false
+		await $api.posts.editPostHtmlContent(+postId, value)
+		isEditorSaved.value = true
+	} catch (error) {
+		toastError(error)
+	}
+}, 3000)
+
+watch(
+	() => editorHtml.value,
+	(newVal, oldVal) => {
+		console.log('[EDITOR]', editorHtml.value)
+		onUpdateEditor(editorHtml.value)
+	}
+)
 
 onMounted(() => {
 	locale.setLang('en')

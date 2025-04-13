@@ -19,7 +19,7 @@ export interface IPost {
 	seoDescription?: string
 	content?: Buffer
 	status: EPostStatus
-	author: IUser['id']
+	author: IUser
 	category?: ICategory
 	tags: ITag[]
 	// comments: Comment[]
@@ -36,6 +36,8 @@ export interface IParamsGetListPosts extends IPagination {
 	categoryId?: number | null
 	createdAtFrom?: Date | string | null
 	createdAtTo?: Date | string | null
+	categorySlug?: string | null
+	tagSlug?: string | null
 }
 
 export interface IBodyEditPost {

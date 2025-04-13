@@ -4,7 +4,8 @@
 
 		<UploadImage />
 
-		<CalendarInput class="mt-2 w-[280px]" />
+		<CalendarInput class="mt-2 w-[280px]" :model-value="dateInput" />
+		<Button @click="dateInput = '2025-12-31'">Date to 2025-12-31</Button>
 		<CalendarRangeInput class="w-[568px]" />
 		<MultiSelect class="w-[280px]" :options="frameworksList" />
 
@@ -136,6 +137,7 @@ import UploadImage from '~/components/ui/upload/UploadImage.vue'
 const colorMode = useColorMode()
 const pageNum = ref(1)
 const pageSize = ref(10)
+const dateInput = ref('2025-01-01')
 
 //Options
 const frameworksList = [

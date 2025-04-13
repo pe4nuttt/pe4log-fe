@@ -7,6 +7,7 @@ import type {
 	IResponseUploadPostCoverImage
 } from '~/types'
 import HttpFactory from '../factory'
+import type { JSONContent } from 'echo-editor'
 
 class PostsModule extends HttpFactory {
 	private readonly RESOURCE = '/posts'
@@ -15,10 +16,28 @@ class PostsModule extends HttpFactory {
 		return this.call<IApiReponse<IPost>>('GET', `${this.RESOURCE}/${id}`)
 	}
 
+	async getPostHtmlContent(id: IPost['id']) {
+		return this.call<IApiReponse<string | null>>(
+			'GET',
+			`${this.RESOURCE}/${id}/html`
+		)
+	}
+
 	async getListPosts(params: IParamsGetListPosts) {
 		return this.call<IApiReponse<IPaginationRes<IPost>>>(
 			'GET',
 			`${this.RESOURCE}`,
+			undefined,
+			{
+				params
+			}
+		)
+	}
+
+	async getListPostsClient(params: IParamsGetListPosts) {
+		return this.call<IApiReponse<IPaginationRes<IPost>>>(
+			'GET',
+			`${this.RESOURCE}/client`,
 			undefined,
 			{
 				params
@@ -35,6 +54,16 @@ class PostsModule extends HttpFactory {
 			'PATCH',
 			`${this.RESOURCE}/${postId}`,
 			body
+		)
+	}
+
+	async editPostHtmlContent(postId: number, htmlContent: string) {
+		return this.call<IApiReponse<string | null>>(
+			'PUT',
+			`${this.RESOURCE}/${postId}/html`,
+			{
+				htmlContent
+			}
 		)
 	}
 
