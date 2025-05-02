@@ -10,6 +10,8 @@
 						v-for="post in blogPosts"
 						:key="post.id"
 						class="inset-shadow-sm group flex cursor-pointer flex-col overflow-hidden rounded-md border shadow-md dark:shadow-sm dark:shadow-muted"
+						:href="`/blog/${post.slug}`"
+						:aria-label="post.title"
 					>
 						<div class="p-3 pb-0">
 							<NuxtImg
@@ -59,6 +61,7 @@
 					:total="blogPostsTotal"
 					show-edges
 					:page="searchParams.page"
+					@update:page="onPageChange"
 					class="flex justify-center"
 				>
 					<PaginationList v-slot="{ items }" class="flex items-center gap-1">
@@ -455,6 +458,17 @@ const mostViewPosts = [
 const blogPosts = computed(() => postsData.value?.data?.items ?? [])
 const blogPostsTotal = computed(() => postsData.value?.data.totalCount ?? 0)
 const blogPostsPageSize = computed(() => postsData.value?.data.limit ?? 0)
+
+const onPageChange = async (page: number) => {
+	if (page && page === searchParams.value.page) return
+
+	const query: Record<string, any> = { ...route.query, page }
+	if (page === 1) {
+		delete query.page
+	}
+	await navigateTo({ path: route.path, query })
+	refresh()
+}
 </script>
 
 <style scoped></style>

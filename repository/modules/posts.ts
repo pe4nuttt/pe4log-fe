@@ -16,10 +16,17 @@ class PostsModule extends HttpFactory {
 		return this.call<IApiReponse<IPost>>('GET', `${this.RESOURCE}/${id}`)
 	}
 
-	async getPostHtmlContent(id: IPost['id']) {
+	async getPostHtmlContent(slug: IPost['slug']) {
 		return this.call<IApiReponse<string | null>>(
 			'GET',
-			`${this.RESOURCE}/${id}/html`
+			`${this.RESOURCE}/${slug}/html`
+		)
+	}
+
+	async getPostDetailByClient(slug: IPost['slug']) {
+		return this.call<IApiReponse<IPost>>(
+			'GET',
+			`${this.RESOURCE}/${slug}/client`
 		)
 	}
 

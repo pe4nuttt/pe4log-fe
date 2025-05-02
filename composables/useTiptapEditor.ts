@@ -53,7 +53,5 @@ export const useTiptapEditor = ({ ydoc, provider }: IUseTipTapEditorParams) => {
 	//   },
 	// });
 
-	console.log('[useEditor]', editor)
-
 	return { editor }
 }

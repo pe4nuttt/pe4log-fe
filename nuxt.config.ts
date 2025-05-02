@@ -18,6 +18,20 @@ export default defineNuxtConfig({
 		'@nuxt/image',
 		'@nuxt/test-utils/module'
 	],
+	// vite: {
+	// 	ssr: {
+	// 		noExternal: ['yjs'] // Ensure bundled into SSR
+	// 	},
+	// 	resolve: {
+	// 		alias: {
+	// 			yjs: './node_modules/yjs/dist/yjs.mjs' // 💥 force both client and SSR to use ESM build
+	// 		},
+	// 		dedupe: ['yjs']
+	// 	},
+	// 	optimizeDeps: {
+	// 		include: ['yjs']
+	// 	}
+	// },
 	shadcn: {
 		/**
 		 * Prefix for all the imported component

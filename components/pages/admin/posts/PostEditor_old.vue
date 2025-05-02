@@ -39,10 +39,6 @@ onMounted(async () => {
 		provider: provider
 	})
 	tiptapEditor.value = editor
-
-	console.log('[MOUNTED]', editor)
-
-	// initHocuspocusProvider();
 })
 </script>
 

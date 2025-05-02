@@ -101,6 +101,10 @@
 		</Drawer>
 
 		<Button disabled>Button Disabled</Button>
+
+		<ClientOnly>
+			<EchoEditorSample />
+		</ClientOnly>
 	</div>
 </template>
 
@@ -133,6 +137,7 @@ import CalendarRangeInput from '~/components/ui/calendar-select/CalendarRangeInp
 import MultiSelect from '~/components/ui/multi-select/MultiSelect.vue'
 import VxDialog from '~/components/global/VxDialog.vue'
 import UploadImage from '~/components/ui/upload/UploadImage.vue'
+import EchoEditorSample from './EchoEditorSample.vue'
 
 const colorMode = useColorMode()
 const pageNum = ref(1)

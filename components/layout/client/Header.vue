@@ -1,6 +1,6 @@
 <template>
 	<header
-		class="sticky top-0 flex items-center justify-between gap-8 bg-inherit px-4 py-4 text-muted-foreground backdrop-blur-sm md:px-5 xl:px-8"
+		class="sticky top-0 z-[100] flex items-center justify-between gap-8 bg-inherit px-4 py-4 text-muted-foreground backdrop-blur-sm md:px-5 xl:px-8"
 	>
 		<NuxtLink to="/" class="text-lg font-semibold text-foreground">
 			Pe4nuttt.blog

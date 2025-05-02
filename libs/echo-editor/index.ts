@@ -41,6 +41,13 @@ import {
 	Printer,
 	Iframe
 } from 'echo-editor'
+import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight'
+import { CodeBlock as TiptapCodeBlock } from '@tiptap/extension-code-block'
+import { all, createLowlight } from 'lowlight'
+import { CustomCodeBlock } from './extensions/CustomCodeBlock'
+import { Heading as CustomHeading } from '../tiptap'
+
+const lowlight = createLowlight(all)
 
 export const EchoEditorExtensionKit = [
 	// BaseKit.configure({
@@ -57,7 +64,8 @@ export const EchoEditorExtensionKit = [
 	Columns,
 	FormatPainter,
 	Clear,
-	Heading.configure({ spacer: true }),
+	// Heading.configure({ spacer: true }),
+	CustomHeading,
 	FontSize,
 	FontFamily,
 	Bold,
@@ -100,7 +108,12 @@ export const EchoEditorExtensionKit = [
 	SlashCommand,
 	HorizontalRule,
 	Fullscreen.configure({ spacer: true }),
-	CodeBlock,
+	CustomCodeBlock.CodeBlock,
+	// CodeBlock,
+	// CodeBlockLowlight.configure({
+	// 	lowlight
+	// }),
+	// TiptapCodeBlock,
 	Table,
 	Code,
 	// AI.configure({

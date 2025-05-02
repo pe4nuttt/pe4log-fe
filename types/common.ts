@@ -41,3 +41,10 @@ export enum EEntityFormType {
 	ADD = 'add',
 	EDIT = 'edit'
 }
+
+export type TOCItem = {
+	id: string | null
+	text: string | null
+	level: number
+	children: TOCItem[]
+}
