@@ -17,7 +17,6 @@ export function useAuth() {
 				userStore.setUser(user)
 				toastSuccess('Login successfully!')
 				isLoggingIn.value = false
-
 				return response
 			}
 		} catch (error) {
@@ -27,9 +26,16 @@ export function useAuth() {
 		}
 	}
 
-	function logout() {
-		clearTokens()
-		userStore.setUser(null)
+	async function logout() {
+		try {
+			await $api.auth.logout()
+			navigateTo('/')
+		} catch (error) {
+			toastError(error)
+		} finally {
+			clearTokens()
+			userStore.setUser(null)
+		}
 	}
 
 	return {

@@ -31,7 +31,17 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem
 } from '@/components/ui/sidebar'
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-vue-next'
+import {
+	BookText,
+	Calendar,
+	Home,
+	Inbox,
+	Logs,
+	Search,
+	Settings,
+	Tags,
+	Users
+} from 'lucide-vue-next'
 
 const sidebarGroups = [
 	{
@@ -45,22 +55,22 @@ const sidebarGroups = [
 			{
 				title: 'Posts',
 				url: '/admin/posts',
-				icon: Inbox
+				icon: BookText
 			},
 			{
 				title: 'Categories',
 				url: '/admin/categories',
-				icon: Calendar
+				icon: Logs
 			},
 			{
 				title: 'Tags',
 				url: '/admin/tags',
-				icon: Calendar
+				icon: Tags
 			},
 			{
 				title: 'Users',
 				url: '/admin/users',
-				icon: Search
+				icon: Users
 			}
 		]
 	},

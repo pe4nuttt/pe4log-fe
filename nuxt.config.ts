@@ -91,6 +91,13 @@ export default defineNuxtConfig({
 		}
 	},
 
+	image: {
+		cloudinary: {
+			baseURL:
+				'https://res.cloudinary.com/pe4nuttt-shopdev/image/upload/v1743917234'
+		}
+	},
+
 	eslint: {},
 
 	runtimeConfig: {

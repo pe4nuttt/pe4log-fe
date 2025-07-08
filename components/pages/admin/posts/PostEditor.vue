@@ -5,7 +5,6 @@
 		:hide-toolbar="false"
 		:hide-menubar="true"
 		max-height="700px"
-		min-height="500px"
 		:dark="$colorMode.value === 'dark'"
 	/>
 	<!-- @change="onUpdateEditor($event)" -->

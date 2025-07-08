@@ -9,6 +9,11 @@ export enum EPostStatus {
 	ARCHIVED = 'archived'
 }
 
+export enum EPostLang {
+	EN = 'en',
+	VI = 'vi'
+}
+
 export interface IPost {
 	id: number
 	title?: string
@@ -22,6 +27,7 @@ export interface IPost {
 	author: IUser
 	category?: ICategory
 	tags: ITag[]
+	lang: EPostLang
 	// comments: Comment[]
 	createdAt: Date
 	updatedAt?: Date | null

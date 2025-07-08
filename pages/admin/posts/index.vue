@@ -13,90 +13,110 @@
 				</Button>
 			</div>
 		</div>
-		<Separator />
 
-		<div class="grid grid-cols-12 items-center gap-x-2 gap-y-2">
-			<div class="col-span-12 md:col-span-4 lg:col-span-3">
-				<Label for="search" class="font-normal">Search</Label>
-				<Input
-					id="search"
-					v-model="searchParams.search"
-					type="text"
-					placeholder="Search posts"
-					class="h-8"
-				/>
-			</div>
-
-			<div class="col-span-12 md:col-span-4 lg:col-span-3">
-				<Label for="status" class="font-normal">Status</Label>
-				<Select v-model="searchParams.status">
-					<SelectTrigger id="status" name="status">
-						<SelectValue placeholder="Select a status" />
-					</SelectTrigger>
-					<SelectContent>
-						<SelectItem :value="null">All</SelectItem>
-						<SelectItem
-							v-for="item in statusOptions"
+		<FilterCollapse default-open header-class="items-end" class="!mt-1.5">
+			<template #header-left>
+				<Tabs v-model="currentTab">
+					<TabsList>
+						<TabsTrigger
+							v-for="item in tabList"
 							:key="item.value"
 							:value="item.value"
 						>
 							{{ item.label }}
-						</SelectItem>
-					</SelectContent>
-				</Select>
-			</div>
+						</TabsTrigger>
+					</TabsList>
+				</Tabs>
+			</template>
 
-			<div class="col-span-12 md:col-span-4 lg:col-span-3">
-				<Label for="category" class="font-normal">Categories</Label>
-				<Select v-model="searchParams.categoryId">
-					<SelectTrigger id="category" name="category">
-						<SelectValue placeholder="Select a category" />
-					</SelectTrigger>
-					<SelectContent>
-						<SelectItem :value="null">All</SelectItem>
-						<SelectItem
-							v-for="item in listCategoryOptions"
-							:key="item.value"
-							:value="item.value"
-						>
-							{{ item.label }}
-						</SelectItem>
-					</SelectContent>
-				</Select>
-			</div>
+			<template #default>
+				<div class="space-y-4">
+					<div class="grid grid-cols-12 items-center gap-x-2 gap-y-2">
+						<div class="col-span-12 md:col-span-4 lg:col-span-3">
+							<Label for="search" class="font-normal">Search</Label>
+							<Input
+								id="search"
+								v-model="searchParams.search"
+								type="text"
+								placeholder="Search posts"
+								class="h-8"
+							/>
+						</div>
 
-			<div class="col-span-12 md:col-span-4 lg:col-span-3">
-				<Label for="tag" class="font-normal">Tags</Label>
-				<MultiSelect
-					id="tag"
-					v-model="searchParams.tagIds"
-					:options="listTagOptions"
-					:max-count="1"
-					type="text"
-					placeholder="Select tags"
-					class="min-h-8"
-				/>
-			</div>
+						<div class="col-span-12 md:col-span-4 lg:col-span-3">
+							<Label for="status" class="font-normal">Status</Label>
+							<Select v-model="searchParams.status">
+								<SelectTrigger id="status" name="status">
+									<SelectValue placeholder="Select a status" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem :value="null">All</SelectItem>
+									<SelectItem
+										v-for="item in statusOptions"
+										:key="item.value"
+										:value="item.value"
+									>
+										{{ item.label }}
+									</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
 
-			<div class="col-span-12 md:col-span-8 lg:col-span-6">
-				<Label for="search" class="font-normal">Created at</Label>
-				<CalendarRangeInput v-model="createdAtRanges" />
-			</div>
-			<!-- <Button variant="ghost" size="sm" @click="handleResetFilter">
+						<div class="col-span-12 md:col-span-4 lg:col-span-3">
+							<Label for="category" class="font-normal">Categories</Label>
+							<Select v-model="searchParams.categoryId">
+								<SelectTrigger id="category" name="category">
+									<SelectValue placeholder="Select a category" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem :value="null">All</SelectItem>
+									<SelectItem
+										v-for="item in listCategoryOptions"
+										:key="item.value"
+										:value="item.value"
+									>
+										{{ item.label }}
+									</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
+
+						<div class="col-span-12 md:col-span-4 lg:col-span-3">
+							<Label for="tag" class="font-normal">Tags</Label>
+							<MultiSelect
+								id="tag"
+								v-model="searchParams.tagIds"
+								:options="listTagOptions"
+								:max-count="1"
+								type="text"
+								placeholder="Select tags"
+								class="min-h-8"
+							/>
+						</div>
+
+						<div class="col-span-12 md:col-span-8 lg:col-span-6">
+							<Label for="search" class="font-normal">Created at</Label>
+							<CalendarRangeInput v-model="createdAtRanges" />
+						</div>
+						<!-- <Button variant="ghost" size="sm" @click="handleResetFilter">
 				Reset Filters
 				<X />
 			</Button> -->
-		</div>
+					</div>
 
-		<div class="flex items-center justify-center gap-2">
-			<Button class="h-8" @click="onApplyFilters">Apply filters</Button>
-			<Button class="h-8" variant="secondary" @click="onClearFilters">
-				Reset
-			</Button>
-		</div>
+					<div class="flex items-center justify-center gap-2">
+						<Button class="h-8" @click="onApplyFilters">Apply filters</Button>
+						<Button class="h-8" variant="secondary" @click="onClearFilters">
+							Reset
+						</Button>
+					</div>
+				</div>
+			</template>
+		</FilterCollapse>
 
 		<div class="flex flex-1 flex-col">
 			<GridVx
+				v-show="currentTab === 'list'"
 				:context="context"
 				:loading="isFetchingList"
 				:row-data="postListData"
@@ -105,6 +125,15 @@
 				@row-clicked="(data: IPost[]) => {}"
 				@sort-changed="onSortChange"
 			/>
+
+			<PostGalleryView
+				v-show="currentTab === 'gallery'"
+				:posts="postListData"
+				:loading="isFetchingList"
+				@edit="onClickEdit"
+				@delete="onClickDelete"
+			/>
+
 			<Separator class="mt-6" />
 			<TablePagination
 				v-model:page-num="searchParams.page"
@@ -139,6 +168,9 @@ import Label from '~/components/ui/label/Label.vue'
 import { CalendarRangeInput } from '~/components/ui/calendar-select'
 import { MultiSelect } from '~/components/ui/multi-select'
 import CellRenderTags from '~/components/cellRenderer/CellRenderTags.vue'
+import FilterCollapse from '~/components/layout/admin/FilterCollapse.vue'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import PostGalleryView from '~/components/pages/admin/posts/PostGalleryView.vue'
 
 definePageMeta({
 	layout: 'admin',
@@ -155,6 +187,16 @@ const { $api, $vxConfirm } = useNuxtApp()
 const dayjs = useDayjs()
 const { toastSuccess, toastError } = useAppToast()
 
+const tabList = [
+	{
+		label: 'List view',
+		value: 'list'
+	},
+	{
+		label: 'Gallery view',
+		value: 'gallery'
+	}
+]
 const searchParams = ref<ISearchParamsGetListPosts>({
 	page: 1,
 	limit: 10,
@@ -257,6 +299,7 @@ const colDefs = ref<ColDef<IPost>[]>([
 		minWidth: 80,
 		width: 80,
 		cellClass: 'flex justify-center',
+		sortable: false,
 		cellRendererSelector: (params) => {
 			return {
 				component: CellRenderUpdateDeleteDropdown
@@ -264,6 +307,7 @@ const colDefs = ref<ColDef<IPost>[]>([
 		}
 	}
 ])
+const currentTab = ref('list')
 const context = ref({})
 const statusOptions = [
 	{
@@ -303,10 +347,6 @@ const listTagOptions = computed(() => {
 const handleRefreshTagsList = useDebounceFn(() => {
 	refresh()
 }, 300)
-
-const handleResetFilter = () => {
-	searchParams.value.search = ''
-}
 
 const onSortChange = (sortData: ITableSortChangeData) => {
 	searchParams.value.order = sortData.order
@@ -362,6 +402,7 @@ const onClickDelete = (post: IPost) => {
 }
 
 const onApplyFilters = () => {
+	searchParams.value.page = 1
 	refresh()
 }
 

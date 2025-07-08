@@ -12,6 +12,7 @@
 		<div class="flex items-center gap-2">
 			<Search class="h-9" />
 			<ThemeSwitcher />
+			<HeaderProfile />
 		</div>
 	</header>
 </template>
@@ -22,6 +23,7 @@ import SidebarTrigger from '~/components/ui/sidebar/SidebarTrigger.vue'
 import AppBreadcrumb from './AppBreadcrumb.vue'
 import Search from '~/components/global/Search.vue'
 import ThemeSwitcher from '~/components/global/ThemeSwitcher.vue'
+import HeaderProfile from './HeaderProfile.vue'
 
 interface IProps {
 	fixed?: boolean

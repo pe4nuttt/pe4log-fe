@@ -33,6 +33,7 @@ import { useDebounceFn } from '@vueuse/core'
 import { useSidebar } from '../sidebar'
 import type { EOrder } from '~/types'
 import CustomLoadingOverlay from './CustomLoadingOverlay.vue'
+import { AG_GRID_DARK_MODE, AG_GRID_LIGHT_MODE } from '~/utils/constants'
 
 interface Props
 	extends Partial<
@@ -89,22 +90,47 @@ const colorMode = useColorMode()
 
 const gridApi = ref<GridApi | null>()
 
-const myTheme = themeQuartz.withPart(colorSchemeDark).withParams({
-	accentColor: '#FAFAFA',
-	backgroundColor: '#09090B',
-	borderColor: '#27272A',
-	browserColorScheme: 'dark',
-	chromeBackgroundColor: {
-		ref: 'foregroundColor',
-		mix: 0.07,
-		onto: 'backgroundColor'
-	},
-	fontFamily: {
-		googleFont: 'Inter'
-	},
-	foregroundColor: '#FAFAFA',
-	headerFontSize: 14
-})
+const myTheme = themeQuartz
+	// .withPart(colorSchemeDark)
+	.withParams(
+		{
+			accentColor: '#FAFAFA',
+			backgroundColor: '#09090B',
+			borderColor: '#27272A',
+			browserColorScheme: 'dark',
+			chromeBackgroundColor: {
+				ref: 'foregroundColor',
+				mix: 0.07,
+				onto: 'backgroundColor'
+			},
+			fontFamily: {
+				googleFont: 'Inter'
+			},
+			foregroundColor: '#FAFAFA',
+			headerFontSize: 14
+		},
+		AG_GRID_DARK_MODE
+	)
+	// .withPart(colorSchemeLight)
+	.withParams(
+		{
+			accentColor: '#09090B',
+			backgroundColor: '#FAFAFA',
+			borderColor: '#E4E4E7',
+			browserColorScheme: 'light',
+			chromeBackgroundColor: {
+				ref: 'foregroundColor',
+				mix: 0.07,
+				onto: 'backgroundColor'
+			},
+			fontFamily: {
+				googleFont: 'Inter'
+			},
+			foregroundColor: '#09090B',
+			headerFontSize: 14
+		},
+		AG_GRID_LIGHT_MODE
+	)
 
 const loadingOverlayComponent = ref(CustomLoadingOverlay)
 const loadingOverlayComponentParams = ref({
@@ -147,10 +173,18 @@ const deviceResizeCheck = useDebounceFn(() => {
 		gridApi.value.sizeColumnsToFit()
 }, 300)
 
+const setDarkMode = (enabled: boolean) => {
+	if (document?.body?.dataset) {
+		document.body.dataset.agThemeMode = enabled
+			? AG_GRID_DARK_MODE
+			: AG_GRID_LIGHT_MODE
+	}
+}
+
 watch(
 	colorMode,
 	(newColorMode) => {
-		if (document?.body) document.body.dataset.agThemeMode = newColorMode.value
+		setDarkMode(newColorMode.value === 'dark')
 	},
 	{
 		immediate: true

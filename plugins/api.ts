@@ -10,7 +10,7 @@ import { PREFERENCE_KEYS } from '~/utils/constants'
 
 interface IApiInstace {
 	auth: AuthModule
-	user: UserModule
+	users: UserModule
 	categories: CategoriesModule
 	tags: TagsModule
 	posts: PostsModule
@@ -77,7 +77,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 	const modules: IApiInstace = {
 		auth: new AuthModule(apiFetcher),
-		user: new UserModule(apiFetcher),
+		users: new UserModule(apiFetcher),
 		categories: new CategoriesModule(apiFetcher),
 		tags: new TagsModule(apiFetcher),
 		posts: new PostsModule(apiFetcher),

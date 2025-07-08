@@ -50,8 +50,6 @@ const onClickEdit = () => {
 const onClickDelete = () => {
 	props.params.context?.componentParent?.onClickCellDelete(props.params.data)
 }
-
-onMounted(() => {})
 </script>
 
 <style lang="scss" scoped></style>

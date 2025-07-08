@@ -1,4 +1,4 @@
-import type { IUser } from '~/types'
+import type { IApiReponse, IUser } from '~/types'
 import { PREFERENCE_KEYS } from '~/utils/constants'
 
 export const useUserStore = defineStore('user', () => {
@@ -7,9 +7,12 @@ export const useUserStore = defineStore('user', () => {
 	const user = ref<IUser | null>()
 	const accessToken = useCookie(PREFERENCE_KEYS.ACCESS_TOKEN) // Get token from cookies
 
-	const { data, error, status } = useAsyncData(
+	const { data, error, status } = useAsyncData<IApiReponse<IUser> | null>(
 		'user',
-		() => $api.user.getCurrentUser(),
+		() =>
+			accessToken.value
+				? $api.users.getCurrentUser()
+				: new Promise((resolve) => resolve(null)),
 		{
 			immediate: !!accessToken.value, // Fetch only if accessToken exists
 			watch: [accessToken], // Refetch if accessToken changes,

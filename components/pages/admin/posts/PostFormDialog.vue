@@ -1,6 +1,6 @@
 <template>
 	<Sheet v-model:open="open">
-		<SheetContent class="flex flex-col">
+		<SheetContent class="flex w-[400px] flex-col sm:w-[540px] sm:max-w-none">
 			<LoadingOverlay v-if="isLoading" />
 			<SheetHeader>
 				<SheetTitle>Post</SheetTitle>

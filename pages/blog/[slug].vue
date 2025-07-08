@@ -57,10 +57,6 @@ const { fetchPostDetail, fetchPostHtmlContent } = clientBlogStore
 const { postDetails, postHtmlContent, tableOfContentItems, activeId } =
 	storeToRefs(clientBlogStore)
 
-watch(activeId, (val) => {
-	console.log('activeId', val)
-})
-
 const { status: fetchPostDataStatus } = await useAsyncData(() =>
 	fetchPostDetail()
 )

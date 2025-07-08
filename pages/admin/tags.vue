@@ -163,6 +163,7 @@ const colDefs = ref<ColDef<ITag>[]>([
 		minWidth: 80,
 		width: 80,
 		cellClass: 'flex justify-center',
+		sortable: false,
 		cellRendererSelector: (params) => {
 			return {
 				component: CellRenderUpdateDeleteDropdown

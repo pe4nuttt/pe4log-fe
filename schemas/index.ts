@@ -46,3 +46,20 @@ export const EditPostSchema = z
 			path: ['publishedAt']
 		}
 	)
+
+export const AddUserSchema = z
+	.object({
+		firstName: z.string().nonempty('First name is required').min(2).max(50),
+		lastName: z.string().nonempty('Last name is required').min(2).max(50),
+		email: z.string().nonempty('Email is required').email().min(2).max(50),
+		username: z.string().nonempty('Username is required').min(2).max(250),
+		password: z.string().min(6).max(20).optional().nullable(),
+		confirmPassword: z.string().min(6).max(20).optional().nullable(),
+		role: z.string().nonempty('Role is required'),
+		status: z.string().nonempty('Status is required'),
+		profilePicture: z.string().optional().nullable()
+	})
+	.refine((data) => data.password == data.confirmPassword, {
+		message: "Passwords don't match",
+		path: ['confirmPassword']
+	})

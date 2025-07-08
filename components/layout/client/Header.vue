@@ -42,17 +42,24 @@
 					/>
 				</ClientOnly>
 			</Button>
-			<Button variant="outline" @click="navigateTo('/auth/sign-in')">
+			<Button
+				v-if="!userStore.user"
+				variant="outline"
+				@click="navigateTo('/auth/sign-in')"
+			>
 				Login
 			</Button>
+			<HeaderProfile v-else />
 		</div>
 	</header>
 </template>
 
 <script setup lang="ts">
 import { Separator } from '@/components/ui/separator'
+import HeaderProfile from './HeaderProfile.vue'
 
 const colorMode = useColorMode()
+const userStore = useUserStore()
 
 const handleToggleTheme = () => {
 	if (colorMode.value === 'dark') {

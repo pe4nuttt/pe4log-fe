@@ -122,9 +122,9 @@ watch(
 )
 
 watch(
-	[props.type, () => props.category],
+	[open, props.type, () => props.category],
 	() => {
-		if (props.type === EEntityFormType.EDIT && props.category) {
+		if (open && props.type === EEntityFormType.EDIT && props.category) {
 			setValues({
 				name: props.category.name,
 				slug: props.category.slug

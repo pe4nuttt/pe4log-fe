@@ -17,7 +17,6 @@
 		>
 			<!-- :select-attribute="selectAttribute" -->
 			<template #default="{ inputValue, inputEvents }">
-				{{ inputValue }}
 				<Input
 					v-bind="$attrs"
 					:disabled="disabled"

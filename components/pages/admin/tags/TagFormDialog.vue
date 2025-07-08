@@ -186,9 +186,9 @@ watch(
 )
 
 watch(
-	[props.type, () => props.tag],
+	[open, props.type, () => props.tag],
 	() => {
-		if (props.type === EEntityFormType.EDIT && props.tag) {
+		if (open && props.type === EEntityFormType.EDIT && props.tag) {
 			setValues({
 				name: props.tag.name,
 				slug: props.tag.slug,

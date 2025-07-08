@@ -1,6 +1,9 @@
 <template>
-	<div class="mt-24 h-[2000px] md:mt-28">
-		<section id="section-intro" class="xl:gap8 flex flex-col gap-4 md:gap-6">
+	<div class="h-[2000px]">
+		<section
+			id="section-intro"
+			class="flex flex-col gap-4 rounded-md px-4 py-28 md:gap-6 xl:gap-8"
+		>
 			<h1 class="text-3xl md:text-5xl">Hello, World!</h1>
 			<div
 				class="flex max-w-[90%] flex-col gap-4 md:max-w-[80%] xl:max-w-[70%]"
@@ -34,4 +37,11 @@ definePageMeta({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+#section-intro {
+	/* background-image: url('https://images.alphacoders.com/135/thumbbig-1351306.webp');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat; */
+}
+</style>

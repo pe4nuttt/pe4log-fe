@@ -3,6 +3,14 @@
 		<Button variant="secondary">Submit</Button>
 
 		<UploadImage />
+		<UploadImage class="h-fit w-fit" :loading="true">
+			<template #default="slotProps">
+				<Avatar class="h-24 w-24" @click="slotProps.onClickImage">
+					<AvatarImage :src="''" alt="user-avatar" />
+					<AvatarFallback>CN</AvatarFallback>
+				</Avatar>
+			</template>
+		</UploadImage>
 
 		<CalendarInput class="mt-2 w-[280px]" :model-value="dateInput" />
 		<Button @click="dateInput = '2025-12-31'">Date to 2025-12-31</Button>
@@ -102,6 +110,17 @@
 
 		<Button disabled>Button Disabled</Button>
 
+		<FilterCollapse>
+			<template #header-left>
+				<Tabs default-value="list" class="w-[400px]">
+					<TabsList>
+						<TabsTrigger value="list">List view</TabsTrigger>
+						<TabsTrigger value="gallery">Gallery view</TabsTrigger>
+					</TabsList>
+				</Tabs>
+			</template>
+		</FilterCollapse>
+
 		<ClientOnly>
 			<EchoEditorSample />
 		</ClientOnly>
@@ -138,6 +157,8 @@ import MultiSelect from '~/components/ui/multi-select/MultiSelect.vue'
 import VxDialog from '~/components/global/VxDialog.vue'
 import UploadImage from '~/components/ui/upload/UploadImage.vue'
 import EchoEditorSample from './EchoEditorSample.vue'
+import FilterCollapse from '~/components/layout/admin/FilterCollapse.vue'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const colorMode = useColorMode()
 const pageNum = ref(1)

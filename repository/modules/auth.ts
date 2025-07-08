@@ -11,6 +11,13 @@ class AuthModule extends HttpFactory {
 			body
 		)
 	}
+
+	async logout() {
+		return await this.call<IApiReponse<ILoginResponse>>(
+			'POST',
+			`${this.RESOURCE}/sign-out`
+		)
+	}
 }
 
 export default AuthModule
