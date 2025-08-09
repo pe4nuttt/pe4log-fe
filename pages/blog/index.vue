@@ -134,7 +134,11 @@
 								:key="tag.id"
 								class="[&:nth-last-child(2)]:mr-2"
 							>
-								<Badge as="a" :href="`/tags/${tag.slug}`">
+								<Badge
+									as="a"
+									:href="`/tags/${tag.slug}`"
+									class="cursor-pointer"
+								>
 									{{ tag.name }}
 								</Badge>
 							</li>

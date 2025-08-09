@@ -5,6 +5,7 @@ import CategoriesModule from '~/repository/modules/categories'
 import CommentReactionsModule from '~/repository/modules/comment-reactions'
 import CommentsModule from '~/repository/modules/comments'
 import FilesModule from '~/repository/modules/files'
+import NewsletterModule from '~/repository/modules/newsletter'
 import PostsModule from '~/repository/modules/posts'
 import TagsModule from '~/repository/modules/tags'
 import UserModule from '~/repository/modules/user'
@@ -19,6 +20,7 @@ interface IApiInstace {
 	files: FilesModule
 	comments: CommentsModule
 	commentReactions: CommentReactionsModule
+	newsletter: NewsletterModule
 }
 
 let refreshTokenPromise: Promise<string | null> | null = null
@@ -87,7 +89,8 @@ export default defineNuxtPlugin((nuxtApp) => {
 		posts: new PostsModule(apiFetcher),
 		files: new FilesModule(apiFetcher),
 		comments: new CommentsModule(apiFetcher),
-		commentReactions: new CommentReactionsModule(apiFetcher)
+		commentReactions: new CommentReactionsModule(apiFetcher),
+		newsletter: new NewsletterModule(apiFetcher)
 	}
 
 	return {
