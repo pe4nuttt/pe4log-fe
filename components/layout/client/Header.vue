@@ -7,31 +7,35 @@
 		</NuxtLink>
 
 		<div
-			class="flex h-8 items-center gap-4 rounded-xl border bg-background px-4 py-1"
+			class="absolute left-0 top-0 z-[-1] hidden h-full w-full items-center justify-center sm:flex"
 		>
-			<NuxtLink
-				to="/"
-				active-class="text-foreground"
-				class="text-sm hover:text-foreground"
+			<div
+				class="flex h-8 items-center gap-4 rounded-xl border bg-background px-4 py-1"
 			>
-				Home
-			</NuxtLink>
-			<Separator orientation="vertical" />
-			<NuxtLink
-				to="/blog"
-				active-class="text-foreground"
-				class="text-sm hover:text-foreground"
-			>
-				Blog
-			</NuxtLink>
-			<Separator orientation="vertical" />
-			<NuxtLink
-				to="/about"
-				active-class="text-foreground"
-				class="text-sm hover:text-foreground"
-			>
-				About
-			</NuxtLink>
+				<NuxtLink
+					to="/"
+					active-class="text-foreground"
+					class="text-sm hover:text-foreground"
+				>
+					Home
+				</NuxtLink>
+				<Separator orientation="vertical" />
+				<NuxtLink
+					to="/blog"
+					active-class="text-foreground"
+					class="text-sm hover:text-foreground"
+				>
+					Blog
+				</NuxtLink>
+				<Separator orientation="vertical" />
+				<NuxtLink
+					to="/about"
+					active-class="text-foreground"
+					class="text-sm hover:text-foreground"
+				>
+					About
+				</NuxtLink>
+			</div>
 		</div>
 
 		<div class="flex items-center gap-2">

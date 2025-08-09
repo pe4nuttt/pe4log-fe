@@ -1,12 +1,15 @@
 import type { IPost } from '~/types'
 import * as cheerio from 'cheerio'
+import type { IComment, ICommentTreeNode } from '~/types/comments'
 
 export const useClientBlogStore = defineStore('client-blog', () => {
 	const route = useRoute()
 	const { $api } = useNuxtApp()
+	const userStore = useUserStore()
 	const slug = route.params.slug as string
 	const postDetails = ref<IPost | null>(null)
 	const postHtmlContent = ref<string | null>(null)
+	const postComments = ref<ICommentTreeNode[]>([])
 	const { activeId } = useActiveHeading(
 		'.blog-prose h1, .blog-prose h2, .blog-prose h3'
 	)
@@ -33,6 +36,17 @@ export const useClientBlogStore = defineStore('client-blog', () => {
 		}
 	}
 
+	const fetchPostComments = async () => {
+		try {
+			const res = await $api.comments.getCommentTree(slug)
+			postComments.value = res.data ?? []
+			return res
+		} catch (error) {
+			postComments.value = []
+			throw error
+		}
+	}
+
 	const tableOfContentItems = computed(() => {
 		if (!postHtmlContent.value) return []
 
@@ -52,13 +66,29 @@ export const useClientBlogStore = defineStore('client-blog', () => {
 		}))
 	})
 
+	const onNewTopLevelComment = (newComment: IComment) => {
+		const newCommentNode: ICommentTreeNode = {
+			...newComment,
+			children: [],
+			isLiked: false,
+			isDisliked: false,
+			likesCount: 0,
+			dislikesCount: 0,
+			user: userStore.user!
+		}
+		postComments.value.unshift(newCommentNode)
+	}
+
 	return {
 		postDetails,
 		postHtmlContent,
+		postComments,
 		tableOfContentItems,
 		activeId,
 		tableOfContent,
 		fetchPostDetail,
-		fetchPostHtmlContent
+		fetchPostHtmlContent,
+		fetchPostComments,
+		onNewTopLevelComment
 	}
 })

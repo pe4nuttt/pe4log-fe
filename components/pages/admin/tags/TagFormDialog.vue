@@ -102,7 +102,7 @@
 			</form>
 			<SheetFooter>
 				<SheetClose as-child>
-					<Button variant="outline" type="submit">Close</Button>
+					<Button variant="outline">Close</Button>
 				</SheetClose>
 				<Button type="submit" @click="onSubmit">Save changes</Button>
 			</SheetFooter>

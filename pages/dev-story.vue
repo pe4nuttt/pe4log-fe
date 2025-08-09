@@ -124,6 +124,8 @@
 		<ClientOnly>
 			<EchoEditorSample />
 		</ClientOnly>
+
+		<CommentEditor class="w-[500px]" />
 	</div>
 </template>
 
@@ -159,6 +161,7 @@ import UploadImage from '~/components/ui/upload/UploadImage.vue'
 import EchoEditorSample from './EchoEditorSample.vue'
 import FilterCollapse from '~/components/layout/admin/FilterCollapse.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import CommentEditor from '~/components/pages/client/comment/CommentEditor.vue'
 
 const colorMode = useColorMode()
 const pageNum = ref(1)

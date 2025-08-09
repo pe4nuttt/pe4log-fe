@@ -3,7 +3,8 @@ import type {
 	IBodyAddTag,
 	ITag,
 	IPaginationRes,
-	IParamsGetListTags
+	IParamsGetListTags,
+	ITopTagResponse
 } from '~/types'
 import HttpFactory from '../factory'
 
@@ -35,6 +36,17 @@ class TagsModule extends HttpFactory {
 
 	async deleteTag(tagId: number) {
 		return this.call<IApiReponse<void>>('DELETE', `${this.RESOURCE}/${tagId}`)
+	}
+
+	async getTopTags(limit: number = 6) {
+		return this.call<IApiReponse<ITopTagResponse[]>>(
+			'GET',
+			`${this.RESOURCE}/top`,
+			undefined,
+			{
+				params: { limit }
+			}
+		)
 	}
 }
 

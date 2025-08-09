@@ -18,3 +18,10 @@ export interface IBodyAddTag {
 	slug?: string | null
 	color?: string | null
 }
+
+export interface ITopTagResponse {
+	id: number
+	name: string
+	slug: string
+	postCount: number
+}

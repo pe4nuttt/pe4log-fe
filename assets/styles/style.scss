@@ -20,6 +20,10 @@ body {
 	::-webkit-scrollbar-track {
 		background: #27272a;
 	}
+
+	::-webkit-scrollbar-corner {
+		background-color: #27272a;
+	}
 }
 
 /* Handle */
@@ -31,6 +35,10 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 	// background: #fff;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: transparent;
 }
 
 // Tooltip

@@ -86,7 +86,7 @@ import CategoryDeleteDialog from '~/components/pages/admin/categories/CategoryDe
 import CellRenderUpdateDeleteDropdown from '~/components/cellRenderer/CellRenderUpdateDeleteDropdown.vue'
 
 definePageMeta({
-	layout: 'admin',
+	// layout: 'admin',
 	middleware: ['auth']
 })
 

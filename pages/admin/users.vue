@@ -127,7 +127,7 @@ import FilterCollapse from '~/components/layout/admin/FilterCollapse.vue'
 import { USER_ROLE_OPTIONS, USER_STATUS_OPTIONS } from '~/utils/constants'
 
 definePageMeta({
-	layout: 'admin',
+	// layout: 'admin',
 	middleware: ['auth']
 })
 

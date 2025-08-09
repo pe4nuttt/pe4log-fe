@@ -42,7 +42,9 @@
 								<Avatar class="bg-slate-500">
 									<AvatarFallback>CN</AvatarFallback>
 								</Avatar>
-								<div class="flex flex-1 flex-wrap items-center justify-between">
+								<div
+									class="flex flex-1 flex-wrap items-center justify-between gap-x-2"
+								>
 									<span class="text-sm font-medium">
 										{{ `${post.author.firstName} ${post.author.lastName}` }}
 									</span>
@@ -122,6 +124,31 @@
 						</span>
 					</a>
 				</div>
+
+				<div>
+					<div class="flex flex-col gap-y-4">
+						<h3 class="text-lg font-semibold">Most used tag</h3>
+						<ul class="flex flex-wrap items-center gap-1 gap-x-1">
+							<li
+								v-for="tag in topTags?.data"
+								:key="tag.id"
+								class="[&:nth-last-child(2)]:mr-2"
+							>
+								<Badge as="a" :href="`/tags/${tag.slug}`">
+									{{ tag.name }}
+								</Badge>
+							</li>
+							<li>
+								<a
+									href="/tags"
+									class="text-muted-foreground hover:text-primary"
+								>
+									SEE ALL
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -162,6 +189,10 @@ const {
 	$api.posts.getListPostsClient({
 		...searchParams.value
 	})
+)
+
+const { data: topTags } = await useAsyncData('top-tags', () =>
+	$api.tags.getTopTags(6)
 )
 
 const trendingPosts = [

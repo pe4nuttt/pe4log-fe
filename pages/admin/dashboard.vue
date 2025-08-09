@@ -2,11 +2,6 @@
 	<div>Dashboard</div>
 </template>
 
-<script setup lang="ts">
-definePageMeta({
-	layout: 'admin',
-	middleware: ['auth']
-})
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

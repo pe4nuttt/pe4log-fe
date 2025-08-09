@@ -173,7 +173,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import PostGalleryView from '~/components/pages/admin/posts/PostGalleryView.vue'
 
 definePageMeta({
-	layout: 'admin',
+	// layout: 'admin',
 	middleware: ['auth']
 })
 

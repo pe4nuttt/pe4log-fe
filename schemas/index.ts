@@ -14,7 +14,7 @@ export const AddCategorySchema = z.object({
 export const AddTagSchema = z.object({
 	name: z.string().nonempty('Name is requried').min(3).max(50),
 	slug: z.string().min(3).max(200).optional().nullable().or(z.literal('')),
-	color: z.string().nullable()
+	color: z.string().nullable().optional()
 })
 
 export const EditPostSchema = z

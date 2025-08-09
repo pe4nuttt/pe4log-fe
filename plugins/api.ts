@@ -2,6 +2,8 @@ import { $fetch } from 'ofetch'
 import type { FetchOptions } from 'ofetch'
 import AuthModule from '~/repository/modules/auth'
 import CategoriesModule from '~/repository/modules/categories'
+import CommentReactionsModule from '~/repository/modules/comment-reactions'
+import CommentsModule from '~/repository/modules/comments'
 import FilesModule from '~/repository/modules/files'
 import PostsModule from '~/repository/modules/posts'
 import TagsModule from '~/repository/modules/tags'
@@ -15,6 +17,8 @@ interface IApiInstace {
 	tags: TagsModule
 	posts: PostsModule
 	files: FilesModule
+	comments: CommentsModule
+	commentReactions: CommentReactionsModule
 }
 
 let refreshTokenPromise: Promise<string | null> | null = null
@@ -81,7 +85,9 @@ export default defineNuxtPlugin((nuxtApp) => {
 		categories: new CategoriesModule(apiFetcher),
 		tags: new TagsModule(apiFetcher),
 		posts: new PostsModule(apiFetcher),
-		files: new FilesModule(apiFetcher)
+		files: new FilesModule(apiFetcher),
+		comments: new CommentsModule(apiFetcher),
+		commentReactions: new CommentReactionsModule(apiFetcher)
 	}
 
 	return {

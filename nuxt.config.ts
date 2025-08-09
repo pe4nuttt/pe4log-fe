@@ -16,7 +16,8 @@ export default defineNuxtConfig({
 		'floating-vue/nuxt',
 		'@samk-dev/nuxt-vcalendar',
 		'@nuxt/image',
-		'@nuxt/test-utils/module'
+		'@nuxt/test-utils/module',
+		'floating-vue/nuxt'
 	],
 	// vite: {
 	// 	ssr: {

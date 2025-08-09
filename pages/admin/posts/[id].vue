@@ -42,7 +42,7 @@ import { Settings } from 'lucide-vue-next'
 import PostFormDialog from '~/components/pages/admin/posts/PostFormDialog.vue'
 
 definePageMeta({
-	layout: 'admin',
+	// layout: 'admin',
 	middleware: ['auth']
 })
 

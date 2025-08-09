@@ -78,7 +78,7 @@ import TagDeleteDialog from '~/components/pages/admin/tags/TagDeleteDialog.vue'
 import CellRenderUpdateDeleteDropdown from '~/components/cellRenderer/CellRenderUpdateDeleteDropdown.vue'
 
 definePageMeta({
-	layout: 'admin',
+	// layout: 'admin',
 	middleware: ['auth']
 })
 
